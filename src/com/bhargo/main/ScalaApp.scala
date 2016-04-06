@@ -38,6 +38,22 @@ object ScalaApp {
     patternMatch(list)
     //fix this
     /*funcReturningOption("Demo")*/
+
+    //createList().sortBy(x => x.toString).foreach(println)
+
+    val emrld:Team = new Team("Emerald")
+    val dmnd:Team = new Team("Diamond")
+    val perl:Team = new Team("Pearl")
+
+    val emp1 = Employee("Bhargo",27,"bhargo@orbitz.com")
+    val emp2 = Employee("Khandekar",27,"khandekar@orbitz.com")
+    val emp3 = Employee("Money",27,"money@orbitz.com")
+    val emp4 = Employee("Sukalyan",27,"sukalyan@orbitz.com")
+
+    println(Employee.team)
+
+
+
   }
 
   //function for Option Demo
@@ -166,7 +182,7 @@ object ScalaApp {
   def curriedAdd: (Int) => (Int) => Int = (add _).curried
 
   //a curried function
-  def curriedAdd2(a: Int)(b: Int): Int = a + b
+  def curriedAdd2(a: Int)(b: Int) = a + b
 
   //uncurring a curried function
   val uncurriedAdd = Function.uncurried(curriedAdd2 _)
@@ -174,7 +190,7 @@ object ScalaApp {
   def callCurriedAdd: (Int) => Int = curriedAdd(2)
 
   //variable arguments
-  def varArgs(args: String*) = args.foreach(println)
+  def varArgs(args: String*): Unit = args.foreach(println)
 
 }
 
