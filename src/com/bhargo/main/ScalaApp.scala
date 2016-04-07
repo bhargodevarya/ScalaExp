@@ -2,6 +2,8 @@ package com.bhargo.main
 
 import com.bhargo.enums.Fruit
 import com.bhargo.domain._
+import com.bhargo.traits.{eat, BaseTrait, Speak}
+
 /**
  * Created by barya on 4/4/16.
  */
@@ -51,6 +53,11 @@ object ScalaApp {
     val emp4 = Employee("Sukalyan",27,"sukalyan@orbitz.com")
 
     println(Employee.team)
+
+    val pet = new Pet// with Speak
+   // pet.feed("food")
+    pet.makeSound("sound")
+
 
 
 
@@ -191,6 +198,11 @@ object ScalaApp {
 
   //variable arguments
   def varArgs(args: String*): Unit = args.foreach(println)
+
+}
+
+//class linearization Pet -> eat -> Speak -> baseTrait ->AnyRef ->Any
+class Pet extends Speak with eat{
 
 }
 
