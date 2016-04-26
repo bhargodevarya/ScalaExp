@@ -3,11 +3,20 @@ package com.bhargo.main
 import com.bhargo.enums.Fruit
 import com.bhargo.domain._
 import com.bhargo.traits.{eat, BaseTrait, Speak}
+import akka.actor.ActorSystem
+import akka.actor.Props
+import akka.actor.Actor
+import com.bhargo.actors._
+import com.bhargo.actors.Name
 
 /**
  * Created by barya on 4/4/16.
  */
+
+case class resource(msg:Int)
+
 object ScalaApp {
+
   def main(args: Array[String]) {
     println(add(2, 3))
     println(partialAdd2(5))
@@ -58,9 +67,26 @@ object ScalaApp {
    // pet.feed("food")
     pet.makeSound("sound")
 
+  println(++(6))
 
+    actorsDemo
 
+    /*val evenOdd = new ProdConsumer
+    evenOdd.start*/
 
+    val system = ActorSystem("evenOdd")
+    val act = system.actorOf(Props[Odd], name = "odd")
+    Thread.sleep(1000)
+    act ! resource(1)
+
+  }
+
+  def  actorsDemo() {
+        val system = ActorSystem("Demo")
+        val a = system.actorOf(Props[HelloWorldActor], name ="helloWorld")
+        a ! Name("Bhargo")
+        Thread.sleep(5000)
+        system.terminate
   }
 
   //function for Option Demo
@@ -152,6 +178,7 @@ object ScalaApp {
   }
 
   def listToMap(list: List[Fruit.fruit]) = {
+    //Map((Fruit.APPLE,1),(Fruit.BANANA,1)) for population at creation
     var finalMap: Map[Fruit.fruit, Int] = Map()
     var index = -1
     list.foreach(
@@ -198,6 +225,7 @@ object ScalaApp {
 
   //variable arguments
   def varArgs(args: String*): Unit = args.foreach(println)
+  def ++ = (x:Int) => x+1
 
 }
 
